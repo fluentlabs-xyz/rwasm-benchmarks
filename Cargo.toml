@@ -20,22 +20,22 @@ path = "src/plot.rs"
 
 [dependencies]
 wasmi_old = { package = "wasmi", version = "0.31.2" }
-wasmi_new = { package = "wasmi", version = "0.34.0", features = ["no-hash-maps"] }
-tinywasm = "0.7.0"
-wasmer = { version = "4.3", default-features = false, features = ["engine", "compiler"] }
-wasmer-compiler-singlepass = "4.3"
-wasmer-compiler-cranelift = "4.3"
-wasmtime = { version = "22.0.0", default-features = false, features = ["winch", "cranelift", "runtime"] }
+wasmi_new = { package = "wasmi", version = "0.46.0" }
+tinywasm = "0.8.0"
+wasmer = { version = "6.0.0", default-features = false, features = ["compiler", "wamr"] }
+wasmer-compiler-singlepass = "6.0.0"
+wasmer-compiler-cranelift = "6.0.0"
 makepad-stitch = "0.1.0"
 criterion = "0.5"
 wat = "1"
 serde_json = "1.0.117"
-plotters = "0.3.6"
+plotters = "0.3.7"
 rwasm = { git = "https://github.com/fluentlabs-xyz/rwasm", branch = "devel", default-features = false }
-#rwasm = { path = "../rwasm/rwasm" }
-fluentbase-runtime = { git = "https://github.com/fluentlabs-xyz/fluentbase.git", branch = "devel", default-features = false }
-fluentbase-types = { git = "https://github.com/fluentlabs-xyz/fluentbase.git", branch = "devel", default-features = false }
-fluentbase-codec = { git = "https://github.com/fluentlabs-xyz/fluentbase.git", branch = "devel", default-features = false }
+
+[dependencies.wasmtime]
+version = "32.0.0"
+default-features = false
+features = ["winch", "cranelift", "pulley", "runtime"]
 
 [dependencies.wasm3]
 git = "https://github.com/robbepop/wasm3-rs.git"

@@ -1,17 +1,17 @@
 pub use self::{
+    rwasm::Rwasm,
     stitch::Stitch,
     tinywasm::Tinywasm,
     wasm3::Wasm3,
     wasmer::Wasmer,
     wasmi_new::WasmiNew,
     wasmi_old::WasmiOld,
-    wasmtime::Wasmtime,
+    wasmtime::{Strategy as WasmtimeStrategy, Wasmtime},
 };
-use crate::{utils::TestFilter, vms::rwasm::Rwasm};
+use crate::utils::TestFilter;
 use ::wasmi_new::ModuleImportsIter;
 
 mod rwasm;
-mod rwasm_runtime;
 mod stitch;
 mod tinywasm;
 mod wasm3;
@@ -57,44 +57,49 @@ pub fn vms_under_test() -> Vec<Box<dyn BenchVm>> {
             compilation_mode: ::wasmi_new::CompilationMode::Eager,
             validation: Validation::Checked,
         }),
-        // Box::new(WasmiNew {
-        //     compilation_mode: ::wasmi_new::CompilationMode::Eager,
-        //     validation: Validation::Unchecked,
-        // }),
+        Box::new(WasmiNew {
+            compilation_mode: ::wasmi_new::CompilationMode::Eager,
+            validation: Validation::Unchecked,
+        }),
         Box::new(WasmiNew {
             compilation_mode: ::wasmi_new::CompilationMode::Lazy,
             validation: Validation::Checked,
         }),
-        // Box::new(WasmiNew {
-        //     compilation_mode: ::wasmi_new::CompilationMode::Lazy,
-        //     validation: Validation::Unchecked,
-        // }),
-        // Box::new(WasmiNew {
-        //     compilation_mode: ::wasmi_new::CompilationMode::LazyTranslation,
-        //     validation: Validation::Checked,
-        // }),
-        // Box::new(Tinywasm),
-        // Box::new(Wasm3 {
-        //     compilation_mode: wasm3::CompilationMode::Eager,
-        // }),
-        // Box::new(Wasm3 {
-        //     compilation_mode: wasm3::CompilationMode::Lazy,
-        // }),
-        // Box::new(Stitch),
-        // Box::new(Wasmtime {
-        //     strategy: ::wasmtime::Strategy::Cranelift,
-        // }),
-        // // Box::new(Wasmtime {
-        // //     strategy: ::wasmtime::Strategy::Winch,
-        // // })
+        Box::new(WasmiNew {
+            compilation_mode: ::wasmi_new::CompilationMode::Lazy,
+            validation: Validation::Unchecked,
+        }),
+        Box::new(WasmiNew {
+            compilation_mode: ::wasmi_new::CompilationMode::LazyTranslation,
+            validation: Validation::Checked,
+        }),
+        Box::new(Tinywasm),
+        Box::new(Wasm3 {
+            compilation_mode: wasm3::CompilationMode::Eager,
+        }),
+        Box::new(Wasm3 {
+            compilation_mode: wasm3::CompilationMode::Lazy,
+        }),
+        Box::new(Stitch),
+        Box::new(Wasmtime {
+            strategy: WasmtimeStrategy::Cranelift,
+        }),
+        Box::new(Wasmtime {
+            strategy: WasmtimeStrategy::Winch,
+        }),
+        Box::new(Wasmtime {
+            strategy: WasmtimeStrategy::Pulley,
+        }),
         Box::new(Wasmer {
             compiler: wasmer::WasmerCompiler::Cranelift,
         }),
         Box::new(Wasmer {
             compiler: wasmer::WasmerCompiler::Singlepass,
         }),
-        Box::new(Rwasm),
-        // Box::new(RwasmRm)
+        Box::new(Wasmer {
+            compiler: wasmer::WasmerCompiler::Wamr,
+        }),
+        Box::new(Rwasm {}),
     ]
 }
 

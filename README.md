@@ -12,8 +12,8 @@ The following Wasm runtimes and configurations are included.
 | [Wasmi v0.32] | `wasmi-v0.32` | `eager`, `eager.unchecked`, `lazy`, `lazy.unchecked`, `lazy-translation` | New Wasmi Wasm interpreter version with major updates. |
 | [Tinywasm] | `tinywasm` | | Very tiny zero-dependencies Wasm interpreter. |
 | [Wasm3] | `wasm3` | `eager`, `lazy` | A very fast well-established Wasm interpreter. |
-| [Wasmtime] | `wasmtime` | `cranelift`, `winch` | Well established Wasm JIT runtime with cutting edge Wasm features. Winch only works on `x86` platforms. |
-| [Wasmer] | `wasmer` | `cranelift`, `singlepass` | Universal Wasm JIT runtime with many bindings to other language ecosystems. |
+| [Wasmtime] | `wasmtime` | `cranelift`, `winch`, `pulley` | Well established Wasm JIT runtime with cutting edge Wasm features. Winch only works on `x86` platforms. |
+| [Wasmer] | `wasmer` | `cranelift`, `singlepass`, `wamr` | Universal Wasm JIT runtime with many bindings to other language ecosystems. |
 | [Stitch] | `stitch` | | New experimental and very fast zero-dependencies Wasm interpreter. |
 
 Ideally we had more Wasm runtimes, e.g. [WAMR], [Toywasm] and [Wain] but those had no proper Rust bindings or sufficiently flexible APIs respectively.
@@ -131,3 +131,16 @@ the benchmark results into a file and use the file to plot the data later:
 cargo criterion --bench criterion --message-format=json > results.json
 cat results.json | cargo run --bin plot
 ```
+
+## License
+
+Licensed under either of
+
+  * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
+  * MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
+
+at your option.
+
+## Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
